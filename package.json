@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.77",
+    "color-thief-node": "^1.0.4"
+  }
+}
