@@ -78,7 +78,7 @@ class zkcard {
     if (!this.color) this.setColor('ff0000'); // Màu mặc định nếu không có giá trị color(đỏ)
     if (!this.theme) this.setTheme('classic'); // Mặc định là theme classic
     if (!this.brightness) this.setBrightness(0); // Mặc định là độ sáng 0
-    if (!this.thumbnail) this.setThumbnail('https://raw.githubusercontent.com/ZenKho-chill/zkcard/5cc80c7c9e96ddc7baf19dde0f04aad9b3a9b07a/build/structures/images/avatar.png'); // Mặc định là ảnh đại diện của zkcard
+    if (!this.thumbnail) this.setThumbnail('https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/avatar.png'); // Mặc định là ảnh đại diện của zkcard
     if (!this.progress) this.setProgress(0); // Mặc định là tiến trình 0
     if (!this.starttime) this.setStartTime('0:00'); // Mặc định là thời gian bắt đầu 0:00
     if (!this.endtime) this.setEndTime('0:00'); // Mặc định là thời gian kết thúc 0:00
@@ -147,14 +147,14 @@ class zkcard {
 
             // URL hình ảnh được chọn ngẫu nhiên
             const imageUrls = [
-              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/5cc80c7c9e96ddc7baf19dde0f04aad9b3a9b07a/build/structures/images/1.png',
-              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/5cc80c7c9e96ddc7baf19dde0f04aad9b3a9b07a/build/structures/images/2.png',
-              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/5cc80c7c9e96ddc7baf19dde0f04aad9b3a9b07a/build/structures/images/3.png',
-              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/5cc80c7c9e96ddc7baf19dde0f04aad9b3a9b07a/build/structures/images/4.png',
-              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/5cc80c7c9e96ddc7baf19dde0f04aad9b3a9b07a/build/structures/images/5.png',
-              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/5cc80c7c9e96ddc7baf19dde0f04aad9b3a9b07a/build/structures/images/6.png',
-              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/5cc80c7c9e96ddc7baf19dde0f04aad9b3a9b07a/build/structures/images/7.png',
-              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/5cc80c7c9e96ddc7baf19dde0f04aad9b3a9b07a/build/structures/images/8.png',
+              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/1.png',
+              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/2.png',
+              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/3.png',
+              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/4.png',
+              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/5.png',
+              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/6.png',
+              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/7.png',
+              'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/8.png',
               // Thêm các URL hình ảnh khác nếu cần
             ];
 
@@ -181,7 +181,7 @@ class zkcard {
                 }
               }
             }).catch(() => {
-              thumbnailImage = canvas.loadImage(`https://raw.githubusercontent.com/ZenKho-chill/zkcard/5cc80c7c9e96ddc7baf19dde0f04aad9b3a9b07a/build/structures/images/avatar.png`);
+              thumbnailImage = canvas.loadImage(`https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/avatar.png`);
             })
 
             const thumbnailSize = Math.min(thumbnailImage.width, thumbnailImage.height);
