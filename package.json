@@ -1,44 +1,67 @@
 {
   "name": "zkcard",
   "version": "1.5.2",
-  "description": "A customizable zkSync card generator",
+  "description": "Thư viện Node.js tạo các thẻ card đẹp mắt cho ứng dụng âm nhạc và media",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "test": "node examples/test"
+    "test": "node examples/test",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "build",
-    "res"
+    "res",
+    "README.md",
+    "LICENSE"
   ],
   "keywords": [
+    "zkcard",
     "music-card",
     "discord-music-card",
     "musix-card-discord",
     "discord.js",
     "spotify",
     "youtube",
-    "image",
+    "card-generator",
+    "music-player-card",
+    "canvas",
+    "image-generation",
     "node-canvas",
     "canvas-constructor",
     "discord",
-    "discord-canvas"
+    "discord-canvas",
+    "music-bot",
+    "thumbnail",
+    "color-extraction",
+    "auto-color",
+    "progress-bar"
   ],
-  "author": "ZenKho",
+  "author": {
+    "name": "ZenKho-chill",
+    "url": "https://github.com/ZenKho-chill"
+  },
   "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "dependencies": {
     "@napi-rs/canvas": "^0.1.77",
     "color-thief-node": "^1.0.4"
   },
   "devDependencies": {
-    "@types/node": "24.3.0",
-    "typescript": "5.9.2"
+    "@types/node": "^24.3.0",
+    "typescript": "^5.9.2"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ZenKho-chill/zkcard.git"
+    "url": "git+https://github.com/ZenKho-chill/zkcard.git"
   },
+  "homepage": "https://github.com/ZenKho-chill/zkcard#readme",
   "bugs": {
     "url": "https://github.com/ZenKho-chill/zkcard/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

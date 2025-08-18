@@ -178,8 +178,7 @@ Mọi đóng góp đều được chào đón! Vui lòng tạo issue hoặc pull
 
 ## Changelog
 
-### v1.0.0
-- Phiên bản đầu tiên
+### v1.5.2
 - Hỗ trợ theme "classic"
 - Tự động trích xuất màu từ thumbnail
 - Hỗ trợ nhiều font chữ quốc tế
