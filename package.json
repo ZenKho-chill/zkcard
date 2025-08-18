@@ -5,9 +5,7 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "test": "node examples/test",
-    "build": "tsc",
-    "prepublishOnly": "npm run build"
+    "test": "node examples/test"
   },
   "files": [
     "build",
