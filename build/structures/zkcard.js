@@ -1,5 +1,5 @@
 const canvas = require('@napi-rs/canvas');
-const colorFetch = require('../functions/colorFetch');
+const { colorFetch } = require('../functions/colorFetch');
 
 canvas.GlobalFonts.registerFromPath(`node_modules/zkcard/build/structures/fonts/circularstd-black.otf`, "circular-std");
 canvas.GlobalFonts.registerFromPath(`node_modules/zkcard/build/structures/fonts/notosans-jp-black.ttf`, "noto-sans-jp");
@@ -98,7 +98,7 @@ class zkcard {
       this.thumbnail
     );
 
-    if (thisname.replace(/\s/g, '').length > 15) this.name = `${this.name.slice(0, 15)}...`;
+    if (this.name.replace(/\s/g, '').length > 15) this.name = `${this.name.slice(0, 15)}...`;
     if (this.author.replace(/\s/g, '').length > 15) this.author = `${this.author.slice(0, 15)}...`;
     if (this.requester.replace(/\s/g, '').length > 35) this.requester = `${this.requester.slice(0, 35)}...`;
 
@@ -139,6 +139,21 @@ class zkcard {
       progressBarCtx.fillStyle = `#${validatedColor}`;
       progressBarCtx.fill();
 
+      function roundRect(ctx, x, y, width, height, radius) {
+        ctx.beginPath();
+        ctx.moveTo(x + radius, y);
+        ctx.lineTo(x + width - radius, y);
+        ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+        ctx.lineTo(x + width, y + height - radius);
+        ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+        ctx.lineTo(x + radius, y + height);
+        ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+        ctx.lineTo(x, y + radius);
+        ctx.quadraticCurveTo(x, y, x + radius, y);
+        ctx.closePath();
+      }
+
+
       const circleCanvas = canvas.createCanvas(1000, 1000);
       const circleCtx = circleCanvas.getContext('2d');
 
@@ -173,30 +188,44 @@ class zkcard {
       const thumbnailCtx = thumbnailCanvas.getContext('2d');
 
       let thumbnailImage;
+      const _avatarFallback = `https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/avatar.png`;
 
-      thumbnailImage = await canvas.loadImage(this.thumbnail, {
-        requestOptions: {
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
+      let thumbnailSource = this.thumbnail;
+      const isString = typeof thumbnailSource === 'string';
+      const imageExtRegex = /\.(png|jpe?g|gif|webp|bmp|svg)(\?.*)?$/i;
+      const isDataImage = isString && /^data:image\//i.test(thumbnailSource);
+      const hasImageExt = isString && imageExtRegex.test(thumbnailSource);
+
+      if (!isString || (!isDataImage && !hasImageExt)) {
+        thumbnailSource = _avatarFallback;
+      }
+
+      try {
+        thumbnailImage = await canvas.loadImage(thumbnailSource, {
+          requestOptions: {
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
+            }
           }
-        }
-      }).catch(() => {
-        thumbnailImage = canvas.loadImage(`https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/avatar.png`);
-      })
+        });
+      } catch (err) {
+        thumbnailImage = await canvas.loadImage(_avatarFallback);
+      }
 
       const thumbnailSize = Math.min(thumbnailImage.width, thumbnailImage.height);
       const thumbnailX = (thumbnailImage.width - thumbnailSize) / 2;
       const thumbnailY = (thumbnailImage.height - thumbnailSize) / 2;
 
-      thumbnailCtx.drawImage(thumbnailImage, thumbnailX, thumbnailY, thumbnailSize, 0, 0, thumbnailCanvas.width, thumbnailCanvas.height);
+      thumbnailCtx.drawImage(thumbnailImage, thumbnailX, thumbnailY, thumbnailSize, thumbnailSize, 0, 0, thumbnailCanvas.width, thumbnailCanvas.height);
 
       // Vẽ hình thu nhỏ
-      ctx.drawImage(thumbnailCanvas, 5, 40, 180, 130);
+      ctx.drawImage(thumbnailCanvas, 45, 38, 190, 135);
 
       // Thêm đường viền màu trắng
       ctx.strokeStyle = '#fff'; // Màu trắng
       ctx.lineWidth = 5; // Độ dày đường viền
-      ctx.strokeRect(50, 40, 180, 130); // Vẽ đường viền quanh hình thu nhỏ
+      ctx.roundRect(45, 35, 190, 140, 3); // Vẽ đường viền quanh hình thu nhỏ
+      ctx.stroke();
 
       // Hàm tạo màu hex ngẫu nhiên
       // Mảng chứa các màu sắc
@@ -215,29 +244,29 @@ class zkcard {
       }
 
       // Chọn màu ngẫu nhiên từ mảng được phép
-      ctx.font = "bold 38px circular-std, noto-emoji, noto-sans-jp, noto-sans, noto-sans-kr";
+      ctx.font = "bold 33px circular-std, noto-emoji, noto-sans-jp, noto-sans, noto-sans-kr";
       ctx.fillStyle = getRandomColor(); // Sử dụng màu ngẫu nhiên
-      ctx.fillText(this.name, 250, 90);
+      ctx.fillText(this.name, 250, 85);
 
       ctx.font = "bold 22px circular-std, noto-emoji, noto-sans-jp, noto-sans, noto-sans-kr";
 
       // Vẽ tên tác giả
       ctx.fillStyle = '#FF0000'
-      ctx.fillText(this.author, 250, 120);
+      ctx.fillText(this.author, 250, 110);
 
       // Vẽ tên người yêu cầu
       ctx.fillStyle = getRandomColor();
-      ctx.fillText(this.requester, 250 + ctx.measureText(this.author).width + 10, 120);
+      ctx.fillText(this.requester, 250 + ctx.measureText(this.author).width + 30, 110);
 
       ctx.fillStyle = '#000000';
       ctx.font = "17px circular-std";
-      ctx.fillText(validatedStartTime, 270, 160);
+      ctx.fillText(validatedStartTime, 255, 143);
 
       ctx.fillStyle = '#000000';
       ctx.font - "18px circular-std";
-      ctx.fillText(validatedEndTime, 550, 160);
+      ctx.fillText(validatedEndTime, 540, 143);
 
-      ctx.drawImage(progressBarCanvas, 270, 140, 330, 5);
+      ctx.drawImage(progressBarCanvas, 250, 120, 330, 5);
       ctx.drawImage(circleCanvas, 10, 255, 1000, 1000);
 
       return frame.toBuffer("image/png");

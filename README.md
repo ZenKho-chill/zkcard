@@ -170,7 +170,7 @@ try {
 
 ## License
 
-ISC License
+MIT License
 
 ## Đóng góp
 
