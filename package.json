@@ -1,6 +1,44 @@
 {
+  "name": "zkcard",
+  "version": "1.5.2",
+  "description": "A customizable zkSync card generator",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "test": "node examples/test"
+  },
+  "files": [
+    "build",
+    "res"
+  ],
+  "keywords": [
+    "music-card",
+    "discord-music-card",
+    "musix-card-discord",
+    "discord.js",
+    "spotify",
+    "youtube",
+    "image",
+    "node-canvas",
+    "canvas-constructor",
+    "discord",
+    "discord-canvas"
+  ],
+  "author": "ZenKho",
+  "license": "MIT",
   "dependencies": {
     "@napi-rs/canvas": "^0.1.77",
     "color-thief-node": "^1.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "24.3.0",
+    "typescript": "5.9.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZenKho-chill/zkcard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ZenKho-chill/zkcard/issues"
   }
 }
