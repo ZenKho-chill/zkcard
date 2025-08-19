@@ -1,184 +1,97 @@
-# ZKCard
+<p align="center">
+  <img src="./build/structures/images/logo.png" alt="ZKCard logo" width="140" />
 
-Một thư viện Node.js để tạo các thẻ card đẹp mắt với nhiều tùy chỉnh cho các ứng dụng âm nhạc và media.
+  <h1 align="center">ZKCard</h1>
+  <em>Thư viện Node.js tạo thẻ card đẹp, tối ưu cho ứng dụng âm nhạc và media.</em>
+</p>
 
-## Cài đặt
+## 📝 Tổng quan
+
+ZKCard là một thư viện nhỏ gọn cho Node.js giúp bạn tạo các thẻ (card) PNG tùy chỉnh — hỗ trợ trích xuất màu tự động từ thumbnail, nhiều font quốc tế và thanh tiến trình có animation.
+
+## 📚 Mục lục
+
+- [🚀 Bắt đầu nhanh (Quickstart)](#-bắt-đầu-nhanh-quickstart)
+- [✨ Tính năng](#-tính-năng)
+- [📦 Project index](#-project-index)
+- [🗂️ Cấu trúc dự án](#-cấu-trúc-dự-án)
+- [⚡ Ví dụ nhanh](#-ví-dụ-nhanh)
+- [🔐 License](#-license)
+- [🔁 Chuyển sang README (EN)](README_en.md)
+
+## 🚀 Bắt đầu nhanh (Quickstart)
 
 ```bash
 npm install zkcard
 ```
 
-## Tính năng
-
-- ✨ Tạo các thẻ card với thiết kế đẹp mắt
-- 🎨 Tự động trích xuất màu sắc từ hình ảnh thumbnail
-- 🌈 Hỗ trợ tùy chỉnh màu sắc và độ sáng
-- 📊 Hiển thị thanh tiến trình với animation
-- 🖼️ Hỗ trợ hình ảnh thumbnail từ URL
-- 🎯 Tự động cắt và resize hình ảnh
-- 🌍 Hỗ trợ nhiều font chữ quốc tế (tiếng Nhật, tiếng Hàn, emoji)
-
-## Sử dụng cơ bản
+Ví dụ cơ bản:
 
 ```javascript
 const { zkcard } = require('zkcard');
 
-// Tạo card đơn giản
 const card = new zkcard({
-  name: "Tên bài hát",
-  author: "Tên nghệ sĩ", 
-  requester: "Người yêu cầu",
-  progress: 45,
-  startTime: "1:30",
-  endTime: "3:45"
+  name: 'Tên bài hát',
+  author: 'Tên nghệ sĩ',
+  requester: 'Người yêu cầu',
+  progress: 45
 });
-
-// Tạo buffer ảnh
-const imageBuffer = await card.build();
-
-// Lưu file hoặc gửi qua Discord/Telegram
-require('fs').writeFileSync('card.png', imageBuffer);
-```
-
-## API Reference
-
-### Constructor
-
-```javascript
-new zkcard(options)
-```
-
-#### Options
-
-| Tham số | Kiểu | Mặc định | Mô tả |
-|---------|------|----------|-------|
-| `name` | string | null | Tên bài hát hoặc nội dung chính |
-| `author` | string | null | Tên nghệ sĩ hoặc tác giả |
-| `requester` | string | null | Tên người yêu cầu |
-| `color` | string | 'ff0000' | Màu chủ đạo (hex code) |
-| `theme` | string | 'classic' | Theme hiển thị |
-| `brightness` | number | 0 | Độ sáng (-255 đến 255) |
-| `thumbnail` | string | default avatar | URL hình ảnh thumbnail |
-| `progress` | number | 0 | Tiến trình (0-100) |
-| `startTime` | string | '0:00' | Thời gian bắt đầu |
-| `endTime` | string | '0:00' | Thời gian kết thúc |
-
-### Phương thức
-
-#### Setter Methods (Chainable)
-
-```javascript
-card.setName(name: string)
-card.setAuthor(author: string)  
-card.setRequester(requester: string)
-card.setColor(color: string)
-card.setTheme(theme: string)
-card.setBrightness(brightness: number)
-card.setThumbnail(thumbnail: string)
-card.setProgress(progress: number)
-card.setStartTime(startTime: string)
-card.setEndTime(endTime: string)
-```
-
-#### Build Method
-
-```javascript
-card.build(): Promise<Buffer>
-```
-
-Trả về Promise với Buffer của ảnh PNG.
-
-## Ví dụ nâng cao
-
-### Tạo card với màu tự động từ thumbnail
-
-```javascript
-const card = new zkcard()
-  .setName("Shape of You")
-  .setAuthor("Ed Sheeran")
-  .setRequester("Music Lover")
-  .setThumbnail("https://example.com/album-cover.jpg")
-  .setColor("auto") // Tự động trích xuất màu từ hình ảnh
-  .setBrightness(50) // Tăng độ sáng
-  .setProgress(65)
-  .setStartTime("2:15")
-  .setEndTime("4:20");
 
 const buffer = await card.build();
+require('fs').writeFileSync('card.png', buffer);
 ```
 
-### Tạo card với màu tùy chỉnh
+## ✨ Tính năng
+
+- ✨ Tạo card PNG tùy chỉnh
+- 🎨 Tự động trích xuất màu chủ đạo từ thumbnail (`auto`)
+- 🌈 Hỗ trợ màu hex và điều chỉnh độ sáng
+- 📊 Thanh tiến trình có animation
+- 🖼️ Hỗ trợ thumbnail từ URL hoặc buffer
+- 🔤 Hỗ trợ nhiều font (JP / KR / Emoji)
+
+## 📦 Project index
+
+- Package: `zkcard` — API chính để tạo card
+- Build: `build/` — bản dựng (index.js, index.d.ts)
+- Functions: `functions/` — helper (color extraction, brightness)
+- Structures: `structures/` — layout, fonts, sample images
+
+## 🗂️ Cấu trúc dự án
+
+- LICENSE — Giấy phép dự án
+- package.json — Metadata & scripts
+- build/ — Bản dựng phát hành
+- functions/ — Hàm hỗ trợ (adjustBrightness, colorFetch, ...)
+- structures/ — Font & ảnh mẫu (fonts/, images/)
+
+## ⚡ Ví dụ nhanh
+
+Tạo card và lưu ra file:
 
 ```javascript
-const card = new zkcard({
-  name: "Nơi Này Có Anh",
-  author: "Sơn Tùng M-TP",
-  requester: "Vpop Fan",
-  color: "00ff00", // Màu xanh lá
-  brightness: -30, // Giảm độ sáng
-  progress: 80,
-  startTime: "1:45",
-  endTime: "3:30",
-  thumbnail: "https://example.com/sontung.jpg"
-});
+const { zkcard } = require('zkcard');
 
-const imageBuffer = await card.build();
+const card = new zkcard()
+  .setName('Shape of You')
+  .setAuthor('Ed Sheeran')
+  .setRequester('User')
+  .setThumbnail('https://example.com/cover.jpg')
+  .setColor('auto')
+  .setProgress(65);
+
+const buf = await card.build();
+require('fs').writeFileSync('card.png', buf);
 ```
 
-## Xử lý lỗi
+## 🔐 License
 
-```javascript
-try {
-  const card = new zkcard({
-    // name, author, requester là bắt buộc
-    name: "Test Song",
-    author: "Test Artist", 
-    requester: "Test User",
-    progress: 150 // Lỗi: progress phải từ 0-100
-  });
-  
-  const buffer = await card.build();
-} catch (error) {
-  console.error('Lỗi tạo card:', error.message);
-}
-```
+Dự án này được cấp phép theo MIT — xem file `LICENSE` để biết chi tiết.
 
-## Các lỗi thường gặp
+## 🔁 Chuyển đổi ngôn ngữ
 
-- `Thiếu giá trị name` - Chưa cung cấp tên bài hát
-- `Thiếu giá trị author` - Chưa cung cấp tên tác giả  
-- `Thiếu giá trị requester` - Chưa cung cấp tên người yêu cầu
-- `Giá trị progress phải là một số trong khoảng từ 0 đến 100` - Progress không hợp lệ
-- `Theme không hợp lệ` - Chỉ hỗ trợ theme "classic"
+Muốn xem README bằng tiếng Anh? Mở [README_en.md](README_en.md).
 
-## Giới hạn
+---
 
-- Tên bài hát tối đa 15 ký tự (tự động cắt)
-- Tên tác giả tối đa 15 ký tự (tự động cắt)  
-- Tên người yêu cầu tối đa 35 ký tự (tự động cắt)
-- Progress từ 0-100 (tự động điều chỉnh về 2-99 để hiển thị)
-- Hiện tại chỉ hỗ trợ theme "classic"
-
-## Dependencies
-
-- `@napi-rs/canvas` - Vẽ canvas và xử lý hình ảnh
-- `color-thief-node` - Trích xuất màu sắc từ hình ảnh
-
-## Tác giả
-
-**ZenKho-chill** - [GitHub](https://github.com/ZenKho-chill)
-
-## License
-
-MIT License
-
-## Đóng góp
-
-Mọi đóng góp đều được chào đón! Vui lòng tạo issue hoặc pull request trên GitHub.
-
-## Changelog
-
-### v1.5.2
-- Hỗ trợ theme "classic"
-- Tự động trích xuất màu từ thumbnail
-- Hỗ trợ nhiều font chữ quốc tế
+**Tác giả:** ZenKho-chill — https://github.com/ZenKho-chill
