@@ -1,6 +1,6 @@
 {
   "name": "zkcard",
-  "version": "1.5.2",
+  "version": "1.5.3-beta.0",
   "description": "Thư viện Node.js tạo các thẻ card đẹp mắt cho ứng dụng âm nhạc và media",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -10,6 +10,7 @@
   "files": [
     "build",
     "README.md",
+    "README_en.md",
     "LICENSE"
   ],
   "keywords": [
