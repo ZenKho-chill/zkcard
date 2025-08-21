@@ -16,8 +16,8 @@ class zkcard {
     this.brightness = options?.brightness ?? null;
     this.thumbnail = options?.thumbnail ?? null;
     this.progress = options?.progress ?? null;
-    this.starttime = options?.starttime ?? null;
-    this.endtime = options?.endtime ?? null;
+    this.starttime = options?.startTime ?? null;
+    this.endtime = options?.endTime ?? null;
     this.requester = options?.requester ?? null;
   }
 
@@ -37,7 +37,7 @@ class zkcard {
   }
 
   setTheme(theme) {
-    this.theme = theme;
+    this.theme = 'classic';
     return this;
   }
 
@@ -56,16 +56,6 @@ class zkcard {
     return this;
   }
 
-  setStartTime(starttime) {
-    this.starttime = starttime;
-    return this;
-  }
-
-  setEndTime(endtime) {
-    this.endtime = endtime;
-    return this;
-  }
-
   setRequester(requester) {
     this.requester = `${requester}`;
     return this;
@@ -80,8 +70,6 @@ class zkcard {
     if (!this.brightness) this.setBrightness(0); // Mặc định là độ sáng 0
     if (!this.thumbnail) this.setThumbnail('https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/avatar.png'); // Mặc định là ảnh đại diện của zkcard
     if (!this.progress) this.setProgress(0); // Mặc định là tiến trình 0
-    if (!this.starttime) this.setStartTime('0:00'); // Mặc định là thời gian bắt đầu 0:00
-    if (!this.endtime) this.setEndTime('0:00'); // Mặc định là thời gian kết thúc 0:00
 
     let validatedProgress = parseFloat(this.progress);
     if (Number.isNaN(validatedProgress) || validatedProgress < 0 || validatedProgress > 100) throw new Error('Giá trị progress phải là một số trong khoảng từ 0 đến 100');
@@ -113,6 +101,7 @@ class zkcard {
       const progressBarCtx = progressBarCanvas.getContext('2d');
       const cornerRadius = 10;
 
+      // Vẽ nền cho thanh tiến trình
       progressBarCtx.beginPath();
       progressBarCtx.moveTo(cornerRadius, 0);
       progressBarCtx.lineTo(670 - cornerRadius, 0);
@@ -124,19 +113,21 @@ class zkcard {
       progressBarCtx.lineTo(0, cornerRadius);
       progressBarCtx.arc(cornerRadius, cornerRadius, cornerRadius, Math.PI, 1.5 * Math.PI);
       progressBarCtx.closePath();
-      progressBarCtx.fillStyle = '#ababab';
+      progressBarCtx.fillStyle = '#4d4747';
       progressBarCtx.fill();
+
+      // Vẽ thanh tiến trình
       progressBarCtx.beginPath();
       progressBarCtx.moveTo(cornerRadius, 0);
       progressBarCtx.lineTo(progressBarWidth - cornerRadius, 0);
       progressBarCtx.arc(progressBarWidth - cornerRadius, cornerRadius, cornerRadius, 1.5 * Math.PI, 2 * Math.PI);
-      progressBarCtx.lineTo(progressBarWidth, 25);
+      progressBarCtx.arc(progressBarWidth - cornerRadius, 25 - cornerRadius, cornerRadius, 0, 0.5 * Math.PI);
       progressBarCtx.lineTo(cornerRadius, 25);
       progressBarCtx.arc(cornerRadius, 25 - cornerRadius, cornerRadius, 0.5 * Math.PI, Math.PI);
       progressBarCtx.lineTo(0, cornerRadius);
       progressBarCtx.arc(cornerRadius, cornerRadius, cornerRadius, Math.PI, 1.5 * Math.PI);
       progressBarCtx.closePath();
-      progressBarCtx.fillStyle = `#${validatedColor}`;
+      progressBarCtx.fillStyle = '#ffffff';
       progressBarCtx.fill();
 
       function roundRect(ctx, x, y, width, height, radius) {
@@ -229,16 +220,28 @@ class zkcard {
       thumbnailCtx.drawImage(thumbnailImage, thumbnailX, thumbnailY, thumbnailSize, thumbnailSize, 0, 0, thumbnailCanvas.width, thumbnailCanvas.height);
 
       // Vẽ hình thu nhỏ
-      ctx.drawImage(thumbnailCanvas, 45, 38, 190, 135);
+      ctx.drawImage(thumbnailCanvas, 45, 35, 190, 140);
 
-      // Thêm đường viền màu trắng
-      ctx.strokeStyle = '#fff'; // Màu trắng
+      // Hàm tạo màu hex ngẫu nhiên
+      function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      const randomColor = getRandomColor();
+
+      // Thêm đường viền màu cho hình thu nhỏ
+      ctx.strokeStyle = randomColor;
       ctx.lineWidth = 5; // Độ dày đường viền
       ctx.roundRect(45, 35, 190, 140, 3); // Vẽ đường viền quanh hình thu nhỏ
       ctx.stroke();
 
-      // Hàm tạo màu hex ngẫu nhiên
-      // Mảng chứa các màu sắc
+      // Hàm tạo màu thập lục phân ngẫu nhiên
+      // Mảng màu được phép
       const allowedColors = [
         '#000000',
         '#FF0000',
@@ -246,37 +249,35 @@ class zkcard {
         '#800080',
         '#000080',
         '#2F4F4F'
-      ];
+      ]
 
-      // Chọn màu ngẫu nhiên từ mảng
-      function getRandomColor() {
+      // Chức năng chọn ngẫu nhiên một màu từ mảng trên
+      function getRandomAllowedColor() {
         return allowedColors[Math.floor(Math.random() * allowedColors.length)];
       }
 
       // Chọn màu ngẫu nhiên từ mảng được phép
       ctx.font = "bold 33px circular-std, noto-emoji, noto-sans-jp, noto-sans, noto-sans-kr";
-      ctx.fillStyle = getRandomColor(); // Sử dụng màu ngẫu nhiên
+      ctx.fillStyle = getRandomAllowedColor(); // Sử dụng màu ngẫu nhiên
       ctx.fillText(this.name, 250, 85);
 
-      ctx.font = "bold 22px circular-std, noto-emoji, noto-sans-jp, noto-sans, noto-sans-kr";
-
       // Vẽ tên tác giả
+      ctx.font = "bold 22px circular-std, noto-emoji, noto-sans-jp, noto-sans, noto-sans-kr";
       ctx.fillStyle = '#FF0000'
       ctx.fillText(this.author, 250, 110);
 
+      // Thêm dấu gạch nối (•) giữa người yêu cầu và tác giả
+      const dashWidth = ctx.measureText(" • ").width; // Tính toán chiều rộng của dấu gạch nối
+      const authorWidth = ctx.measureText(this.author).width; // Chiều rộng của tên tác giả
+      ctx.fillStyle = getRandomAllowedColor();
+      ctx.fillText(" • ", 250 + authorWidth, 112);
+
       // Vẽ tên người yêu cầu
+      ctx.font = "bold 22px circular-std, noto-emoji, noto-sans-jp, noto-sans, noto-sans-kr";
       ctx.fillStyle = getRandomColor();
-      ctx.fillText(this.requester, 250 + ctx.measureText(this.author).width + 30, 110);
+      ctx.fillText(this.requester, 250 + authorWidth + dashWidth, 110);
 
-      ctx.fillStyle = '#000000';
-      ctx.font = "17px circular-std";
-      ctx.fillText(validatedStartTime, 255, 143);
-
-      ctx.fillStyle = '#000000';
-      ctx.font - "18px circular-std";
-      ctx.fillText(validatedEndTime, 540, 143);
-
-      ctx.drawImage(progressBarCanvas, 250, 120, 330, 5);
+      ctx.drawImage(progressBarCanvas, 250, 122, 330, 20);
       ctx.drawImage(circleCanvas, 10, 255, 1000, 1000);
 
       return frame.toBuffer("image/png");
