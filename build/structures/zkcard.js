@@ -77,9 +77,6 @@ class zkcard {
     if (validatedProgress < 2) validatedProgress = 2;
     if (validatedProgress > 99) validatedProgress = 99;
 
-    const validatedStartTime = this.starttime || '0.00';
-    const validatedEndTime = this.endtime || '0.00';
-
     const validatedColor = await colorFetch(
       this.color || 'ff0000', // Mặc định là màu đỏ nếu không có giá trị color
       parseInt(this.brightness) || 0,
@@ -153,6 +150,7 @@ class zkcard {
 
       // URL hình ảnh được chọn ngẫu nhiên
       const imageUrls = [
+        // Theme 1
         'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes1/1.png',
         'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes1/2.png',
         'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes1/3.png',
@@ -161,6 +159,7 @@ class zkcard {
         'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes1/6.png',
         'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes1/7.png',
         'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes1/8.png',
+        // Theme 2
         'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes2/1.png',
         'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes2/2.png',
         'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes2/3.png',
@@ -222,27 +221,18 @@ class zkcard {
       // Vẽ hình thu nhỏ
       ctx.drawImage(thumbnailCanvas, 45, 35, 190, 140);
 
+      // Hàm tạo màu ngẫu nhiên
+      function getRandomColor() {
+        // Tạo mã màu hex ngẫu nhiên
+        const randomColor = '#' + Math.floor(Math.random() * 1677215).toString(16);
+        return randomColor;
+      }
+
       // Thêm đường viền màu cho hình thu nhỏ
       ctx.strokeStyle = getRandomColor;
       ctx.lineWidth = 5; // Độ dày đường viền
       ctx.roundRect(45, 35, 190, 140, 3); // Vẽ đường viền quanh hình thu nhỏ
       ctx.stroke();
-
-      // Hàm tạo màu thập lục phân ngẫu nhiên
-      // Mảng màu được phép
-      const allowedColors = [
-        '#000000',
-        '#FF0000',
-        '#FFFFFF',
-        '#800080',
-        '#000080',
-        '#2F4F4F'
-      ]
-
-      // Chức năng chọn ngẫu nhiên một màu từ mảng trên
-      function getRandomColor() {
-        return allowedColors[Math.floor(Math.random() * allowedColors.length)];
-      }
 
       // Chọn màu ngẫu nhiên từ mảng được phép
       ctx.font = "bold 33px circular-std, noto-emoji, noto-sans-jp, noto-sans, noto-sans-kr";
