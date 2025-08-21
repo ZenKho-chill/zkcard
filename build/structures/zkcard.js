@@ -37,7 +37,7 @@ class zkcard {
   }
 
   setTheme(theme) {
-    this.theme = 'classic';
+    this.theme = theme;
     return this;
   }
 
@@ -222,20 +222,8 @@ class zkcard {
       // Vẽ hình thu nhỏ
       ctx.drawImage(thumbnailCanvas, 45, 35, 190, 140);
 
-      // Hàm tạo màu hex ngẫu nhiên
-      function getRandomColor() {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      }
-
-      const randomColor = getRandomColor();
-
       // Thêm đường viền màu cho hình thu nhỏ
-      ctx.strokeStyle = randomColor;
+      ctx.strokeStyle = getRandomColor;
       ctx.lineWidth = 5; // Độ dày đường viền
       ctx.roundRect(45, 35, 190, 140, 3); // Vẽ đường viền quanh hình thu nhỏ
       ctx.stroke();
@@ -252,13 +240,13 @@ class zkcard {
       ]
 
       // Chức năng chọn ngẫu nhiên một màu từ mảng trên
-      function getRandomAllowedColor() {
+      function getRandomColor() {
         return allowedColors[Math.floor(Math.random() * allowedColors.length)];
       }
 
       // Chọn màu ngẫu nhiên từ mảng được phép
       ctx.font = "bold 33px circular-std, noto-emoji, noto-sans-jp, noto-sans, noto-sans-kr";
-      ctx.fillStyle = getRandomAllowedColor(); // Sử dụng màu ngẫu nhiên
+      ctx.fillStyle = getRandomColor(); // Sử dụng màu ngẫu nhiên
       ctx.fillText(this.name, 250, 85);
 
       // Vẽ tên tác giả
@@ -269,7 +257,7 @@ class zkcard {
       // Thêm dấu gạch nối (•) giữa người yêu cầu và tác giả
       const dashWidth = ctx.measureText(" • ").width; // Tính toán chiều rộng của dấu gạch nối
       const authorWidth = ctx.measureText(this.author).width; // Chiều rộng của tên tác giả
-      ctx.fillStyle = getRandomAllowedColor();
+      ctx.fillStyle = getRandomColor();
       ctx.fillText(" • ", 250 + authorWidth, 112);
 
       // Vẽ tên người yêu cầu
