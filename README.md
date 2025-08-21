@@ -70,18 +70,27 @@ require('fs').writeFileSync('card.png', buffer);
 Tạo card và lưu ra file:
 
 ```javascript
-const { zkcard } = require('zkcard');
+(async () => {
+  const { zkcard } = require('zkcard');
+  const fs = require('fs');
 
-const card = new zkcard()
-  .setName('Shape of You')
-  .setAuthor('Ed Sheeran')
-  .setRequester('User')
-  .setThumbnail('https://example.com/cover.jpg')
-  .setColor('auto')
-  .setProgress(65);
+  const card = new zkcard()
+    .setName("Ash Again") // Tên bài hát
+    .setAuthor("Gawr Gura") //  Tên tác giả
+    .setRequester("ZenKho") // Tên người yêu cầu
+    .setColor("auto")
+    .setTheme("classic") // Đừng thay đổi, hiện tại chỉ hỗ trợ classic
+    .setBrightness(50) // Độ sáng
+    .setThumbnail("https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/avatar.png")
+    .setProgress(10) // Thanh thời gian(%)
+    .setStartTime("0.00")
+    .setEndTime("4:59")
 
-const buf = await card.build();
-require('fs').writeFileSync('card.png', buf);
+  const cardBuffer = await card.build();
+
+  fs.writeFileSync(`zkcard.png`, cardBuffer);
+  console.log("Task Done!")
+})()
 ```
 
 ## 🔐 License

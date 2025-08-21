@@ -162,14 +162,24 @@ class zkcard {
 
       // URL hình ảnh được chọn ngẫu nhiên
       const imageUrls = [
-        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/1.png',
-        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/2.png',
-        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/3.png',
-        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/4.png',
-        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/5.png',
-        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/6.png',
-        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/7.png',
-        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/ac5eda846c33f65c22cf0c76ec7ddecd7a8febfd/build/structures/images/8.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes1/1.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes1/2.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes1/3.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes1/4.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes1/5.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes1/6.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes1/7.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes1/8.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes2/1.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes2/2.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes2/3.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes2/4.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes2/5.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes2/6.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes2/7.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes2/8.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes2/9.png',
+        'https://raw.githubusercontent.com/ZenKho-chill/zkcard/0d81720c3e0c1f5737e1c90107ee059437b77082/build/structures/images/themes2/10.png',
         // Thêm các URL hình ảnh khác nếu cần
       ];
 
