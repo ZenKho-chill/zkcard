@@ -111,7 +111,6 @@ zkcard/
     .setTheme("classic") // Theme hiện tại (chỉ hỗ trợ classic)
     .setBrightness(50) // Độ sáng (0-255)
     .setThumbnail("https://your-image-url.com/cover.jpg")
-    .setProgress(10) // Tiến trình phát nhạc (0-100%)
 
   const cardBuffer = await card.build();
   fs.writeFileSync(`zkcard.png`, cardBuffer);
@@ -133,7 +132,6 @@ zkcard/
     color: "#ff6b6b", // Màu hex tùy chỉnh (hoặc 'auto' để tự động)
     brightness: 75,   // Độ sáng (0-255)
     thumbnail: "https://your-image-url.com/cover.jpg",
-    progress: 65      // Tiến trình (0-100%)
   });
 
   const cardBuffer = await card.build();
@@ -152,16 +150,13 @@ zkcard/
 | `setTheme(string)` | Theme card | `classic` | Luôn là `classic` |
 | `setBrightness(number)` | Độ sáng (0-255) | `0` | Chỉ áp dụng khi color=`auto` |
 | `setThumbnail(string)` | URL thumbnail | Avatar mặc định | Hỗ trợ URL và data URI |
-| `setProgress(number)` | Tiến trình (0-100%) | `0` | Tự động clamp 2-99% |
 
 ### Tính năng nổi bật v1.5.4
 
 - 🎨 **18+ Background Themes**: Tự động chọn ngẫu nhiên từ themes1/ (8 ảnh) và themes2/ (10 ảnh)
 - 🌈 **Random Color System**: 
   - Tên bài hát: 6 màu được phép (#000000, #FF0000, #FFFFFF, #800080, #000080, #2F4F4F)
-  - Tên nghệ sĩ: Màu đỏ cố định (#FF0000)
-  - Requester: Màu hex ngẫu nhiên hoàn toàn
-  - Thumbnail border: Màu ngẫu nhiên
+  - Thumbnail border: Màu trắng
 - 📏 **Smart Text Truncation**: Tự động cắt text dài và thêm "..." 
 - 🖼️ **Enhanced Visual**: Rounded corners, gradient effects và professional layout
 

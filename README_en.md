@@ -34,7 +34,6 @@ const card = new zkcard({
   name: 'Song Name',
   author: 'Artist Name',
   requester: 'User',
-  progress: 45,
   color: 'auto',
   brightness: 50
 });
@@ -111,7 +110,6 @@ zkcard/
     .setTheme("classic") // Current theme (only supports classic)
     .setBrightness(50) // Brightness (0-255)
     .setThumbnail("https://your-image-url.com/cover.jpg")
-    .setProgress(10) // Music progress (0-100%)
 
   const cardBuffer = await card.build();
   fs.writeFileSync(`zkcard.png`, cardBuffer);
@@ -133,7 +131,6 @@ zkcard/
     color: "#ff6b6b", // Custom hex color (or 'auto' for automatic)
     brightness: 75,   // Brightness (0-255)
     thumbnail: "https://your-image-url.com/cover.jpg",
-    progress: 65      // Progress (0-100%)
   });
 
   const cardBuffer = await card.build();
@@ -152,16 +149,13 @@ zkcard/
 | `setTheme(string)` | Card theme | `classic` | Always `classic` |
 | `setBrightness(number)` | Brightness (0-255) | `0` | Only applies when color=`auto` |
 | `setThumbnail(string)` | Thumbnail URL | Default avatar | Supports URL and data URI |
-| `setProgress(number)` | Progress (0-100%) | `0` | Auto clamped to 2-99% |
 
 ### v1.5.4 Highlights
 
 - 🎨 **18+ Background Themes**: Auto-randomly selected from themes1/ (8 images) and themes2/ (10 images)
 - 🌈 **Random Color System**: 
   - Song name: 6 allowed colors (#000000, #FF0000, #FFFFFF, #800080, #000080, #2F4F4F)
-  - Artist name: Fixed red color (#FF0000)
-  - Requester: Fully random hex colors
-  - Thumbnail border: Random colors
+  - Thumbnail border: white colors
 - 📏 **Smart Text Truncation**: Auto truncate long text and add "..."
 - 🖼️ **Enhanced Visuals**: Rounded corners, gradient effects and professional layout
 

@@ -94,39 +94,6 @@ class zkcard {
       const progressBarWidth = (validatedProgress / 100) * 670;
       const circleX = progressBarWidth + 60;
 
-      const progressBarCanvas = canvas.createCanvas(670, 25);
-      const progressBarCtx = progressBarCanvas.getContext('2d');
-      const cornerRadius = 10;
-
-      // Vẽ nền cho thanh tiến trình
-      progressBarCtx.beginPath();
-      progressBarCtx.moveTo(cornerRadius, 0);
-      progressBarCtx.lineTo(670 - cornerRadius, 0);
-      progressBarCtx.arc(670 - cornerRadius, cornerRadius, cornerRadius, 1.5 * Math.PI, 2 * Math.PI);
-      progressBarCtx.lineTo(670, 25 - cornerRadius);
-      progressBarCtx.arc(670 - cornerRadius, 25 - cornerRadius, cornerRadius, 0, 0.5 * Math.PI);
-      progressBarCtx.lineTo(cornerRadius, 25);
-      progressBarCtx.arc(cornerRadius, 25 - cornerRadius, cornerRadius, 0.5 * Math.PI, Math.PI);
-      progressBarCtx.lineTo(0, cornerRadius);
-      progressBarCtx.arc(cornerRadius, cornerRadius, cornerRadius, Math.PI, 1.5 * Math.PI);
-      progressBarCtx.closePath();
-      progressBarCtx.fillStyle = '#4d4747';
-      progressBarCtx.fill();
-
-      // Vẽ thanh tiến trình
-      progressBarCtx.beginPath();
-      progressBarCtx.moveTo(cornerRadius, 0);
-      progressBarCtx.lineTo(progressBarWidth - cornerRadius, 0);
-      progressBarCtx.arc(progressBarWidth - cornerRadius, cornerRadius, cornerRadius, 1.5 * Math.PI, 2 * Math.PI);
-      progressBarCtx.arc(progressBarWidth - cornerRadius, 25 - cornerRadius, cornerRadius, 0, 0.5 * Math.PI);
-      progressBarCtx.lineTo(cornerRadius, 25);
-      progressBarCtx.arc(cornerRadius, 25 - cornerRadius, cornerRadius, 0.5 * Math.PI, Math.PI);
-      progressBarCtx.lineTo(0, cornerRadius);
-      progressBarCtx.arc(cornerRadius, cornerRadius, cornerRadius, Math.PI, 1.5 * Math.PI);
-      progressBarCtx.closePath();
-      progressBarCtx.fillStyle = '#ffffff';
-      progressBarCtx.fill();
-
       function roundRect(ctx, x, y, width, height, radius) {
         ctx.beginPath();
         ctx.moveTo(x + radius, y);
@@ -221,42 +188,46 @@ class zkcard {
       // Vẽ hình thu nhỏ
       ctx.drawImage(thumbnailCanvas, 45, 35, 190, 140);
 
-      // Hàm tạo màu ngẫu nhiên
-      function getRandomColor() {
-        // Tạo mã màu hex ngẫu nhiên
-        const randomColor = '#' + Math.floor(Math.random() * 1677215).toString(16);
-        return randomColor;
-      }
-
       // Thêm đường viền màu cho hình thu nhỏ
-      ctx.strokeStyle = getRandomColor;
+      ctx.strokeStyle = '#fff';
       ctx.lineWidth = 5; // Độ dày đường viền
       ctx.roundRect(45, 35, 190, 140, 3); // Vẽ đường viền quanh hình thu nhỏ
       ctx.stroke();
 
-      // Chọn màu ngẫu nhiên từ mảng được phép
-      ctx.font = "bold 33px circular-std, noto-emoji, noto-sans-jp, noto-sans, noto-sans-kr";
+      // Danh sách các màu sắc ngẫu nhiên
+      const allowedColors = [
+        '#000000',
+        '#FF0000',
+        '#FFFFFF',
+        '#800080',
+        '#000080',
+        '#2F4F4F'
+      ]
+
+      // Hàm để lấy màu sắc ngẫu nhiên từ danh sách
+      function getRandomColor() {
+        return allowedColors[Math.floor(Math.random() * allowedColors.length)];
+      }
+
+      // Vẽ tên bài hát
+      ctx.font = "bold 40px circular-std, noto-emoji, noto-sans-jp, noto-sans, noto-sans-kr";
       ctx.fillStyle = getRandomColor(); // Sử dụng màu ngẫu nhiên
-      ctx.fillText(this.name, 250, 85);
+      ctx.fillText(this.name, 250, 100);
 
-      // Vẽ tên tác giả
-      ctx.font = "bold 22px circular-std, noto-emoji, noto-sans-jp, noto-sans, noto-sans-kr";
-      ctx.fillStyle = '#FF0000'
-      ctx.fillText(this.author, 250, 110);
-
-      // Thêm dấu gạch nối (•) giữa người yêu cầu và tác giả
-      const dashWidth = ctx.measureText(" • ").width; // Tính toán chiều rộng của dấu gạch nối
-      const authorWidth = ctx.measureText(this.author).width; // Chiều rộng của tên tác giả
+      // Vẽ tên tác giả (kích thước và phông chữ khác nhau)
+      const authorText = this.author;
+      ctx.font = "bold 30px circular-std, noto-emoji, noto-sans-jp, noto-sans, noto-sans-kr";
       ctx.fillStyle = getRandomColor();
-      ctx.fillText(" • ", 250 + authorWidth, 112);
+      ctx.fillText(authorText, 250, 143);
+
+      // Đo kích thước của tên tác giả để tính toán vị trí vẽ tên người yêu cầu
+      const authorTextWidth = ctx.measureText(authorText).width;
 
       // Vẽ tên người yêu cầu
+      const requesterText = this.requester;
       ctx.font = "bold 22px circular-std, noto-emoji, noto-sans-jp, noto-sans, noto-sans-kr";
       ctx.fillStyle = getRandomColor();
-      ctx.fillText(this.requester, 250 + authorWidth + dashWidth, 110);
-
-      ctx.drawImage(progressBarCanvas, 250, 122, 330, 20);
-      ctx.drawImage(circleCanvas, 10, 255, 1000, 1000);
+      ctx.fillText(requesterText, 250 + authorTextWidth + 15, 143);
 
       return frame.toBuffer("image/png");
     } else {
