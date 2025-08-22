@@ -2876,7 +2876,7 @@ class zkcard {
       const backgroundPath = path.join(themesPath, randomFile);
 
       // Tạo canvas cho blank theme
-      const frame = canvas.createCanvas(1280, 450);
+      const frame = canvas.createCanvas(800, 200);
       const ctx = frame.getContext('2d');
 
       // Load background (blank/minimal background)
