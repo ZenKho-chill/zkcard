@@ -34,8 +34,8 @@ const card = new zkcard({
   name: 'Tên bài hát',
   author: 'Tên nghệ sĩ', 
   requester: 'Người yêu cầu',
-  progress: 45,
   color: 'auto',
+  theme: 'theme1', // "theme1" hoặc "theme2"
   brightness: 50
 });
 
@@ -48,8 +48,7 @@ require('fs').writeFileSync('card.png', buffer);
 - ✨ Tạo card PNG tùy chỉnh với design đẹp mắt
 - 🎨 Tự động trích xuất màu chủ đạo từ thumbnail (`auto`)
 - 🌈 Hỗ trợ màu hex và điều chỉnh độ sáng tùy chỉnh
-- 📊 Thanh tiến trình có animation mượt mà
-- 🖼️ Hỗ trợ thumbnail từ URL hoặc buffer
+- ️ Hỗ trợ thumbnail từ URL hoặc buffer
 - 🔤 Hỗ trợ nhiều font quốc tế (JP / KR / Emoji)
 - 🎯 18+ theme background ngẫu nhiên đa dạng (themes1 & themes2)
 - 🌈 Hiệu ứng màu sắc ngẫu nhiên cho text và border
@@ -59,10 +58,12 @@ require('fs').writeFileSync('card.png', buffer);
 
 - Package: `zkcard` — API chính để tạo card
 - Build: `build/` — bản dựng (index.js, index.d.ts)
-- Functions: `functions/` — helper (colorFetch, adjustBrightness, rgbToHex)
+- Functions: `functions/` — helper (colorFetch, adjustBrightness, rgbToHex, getAvailableThemes)
 - Structures: `structures/` — layout, fonts, themes và sample images
   - fonts/ — Font quốc tế (CircularStd, NotoSans, NotoEmoji)
-  - images/ — Avatar mặc định và 18+ theme backgrounds (themes1 & themes2)
+  - images/ — Avatar mặc định, logo và 18+ theme backgrounds
+    - themes1/ — 8 ảnh background cho theme1
+    - themes2/ — 10 ảnh background cho theme2
 
 ## 🗂️ Cấu trúc dự án
 
@@ -78,6 +79,7 @@ zkcard/
     ├── functions/ — Hàm hỗ trợ
     │   ├── adjustBrightness.js — Điều chỉnh độ sáng
     │   ├── colorFetch.js — Trích xuất màu từ ảnh
+    │   ├── getAvailableThemes.js — Lấy danh sách themes
     │   └── rgbToHex.js — Chuyển đổi RGB sang Hex
     └── structures/ — Tài nguyên card
         ├── zkcard.js — Logic tạo card chính  
@@ -108,7 +110,7 @@ zkcard/
     .setAuthor("Gawr Gura") // Tên nghệ sĩ
     .setRequester("ZenKho") // Người yêu cầu
     .setColor("auto") // Tự động lấy màu từ thumbnail
-    .setTheme("classic") // Theme hiện tại (chỉ hỗ trợ classic)
+    .setTheme("theme1") // Theme khả dụng: "theme1" hoặc "theme2"
     .setBrightness(50) // Độ sáng (0-255)
     .setThumbnail("https://your-image-url.com/cover.jpg")
 
@@ -130,6 +132,7 @@ zkcard/
     author: "Amazing Artist", 
     requester: "Music Lover",
     color: "#ff6b6b", // Màu hex tùy chỉnh (hoặc 'auto' để tự động)
+    theme: "theme2",  // Theme card (theme1 hoặc theme2)
     brightness: 75,   // Độ sáng (0-255)
     thumbnail: "https://your-image-url.com/cover.jpg",
   });
@@ -137,6 +140,25 @@ zkcard/
   const cardBuffer = await card.build();
   fs.writeFileSync(`custom_card.png`, cardBuffer);
 })()
+```
+
+### Kiểm tra themes khả dụng
+
+```javascript
+const { zkcard, getAvailableThemes } = require('zkcard');
+
+// Lấy danh sách tất cả themes có sẵn
+const availableThemes = getAvailableThemes();
+console.log('Themes khả dụng:', availableThemes); // ['themes1', 'themes2']
+
+// Sử dụng theme ngẫu nhiên
+const randomTheme = availableThemes[Math.floor(Math.random() * availableThemes.length)];
+const card = new zkcard()
+  .setName("Random Theme Song")
+  .setAuthor("Artist")
+  .setRequester("User")
+  .setTheme(randomTheme)
+  .setColor("#ff6b6b");
 ```
 
 ### Các tùy chọn thiết lập
@@ -147,11 +169,11 @@ zkcard/
 | `setAuthor(string)` | Tên nghệ sĩ | **Required** | Tự động cắt nếu >15 ký tự |
 | `setRequester(string)` | Người yêu cầu phát nhạc | **Required** | Tự động cắt nếu >35 ký tự |
 | `setColor(string)` | Màu theme (`auto` hoặc hex) | `#ff0000` | `auto` sẽ lấy từ thumbnail |
-| `setTheme(string)` | Theme card | `classic` | Luôn là `classic` |
+| `setTheme(string)` | Theme card | `theme1` | `theme1` hoặc `theme2` |
 | `setBrightness(number)` | Độ sáng (0-255) | `0` | Chỉ áp dụng khi color=`auto` |
 | `setThumbnail(string)` | URL thumbnail | Avatar mặc định | Hỗ trợ URL và data URI |
 
-### Tính năng nổi bật v1.5.4
+### Tính năng nổi bật v1.5.8
 
 - 🎨 **18+ Background Themes**: Tự động chọn ngẫu nhiên từ themes1/ (8 ảnh) và themes2/ (10 ảnh)
 - 🌈 **Random Color System**: 
@@ -159,6 +181,7 @@ zkcard/
   - Thumbnail border: Màu trắng
 - 📏 **Smart Text Truncation**: Tự động cắt text dài và thêm "..." 
 - 🖼️ **Enhanced Visual**: Rounded corners, gradient effects và professional layout
+- 🎯 **Simplified API**: Loại bỏ progress bar để tập trung vào tính năng cốt lõi
 
 ## 🔐 License
 

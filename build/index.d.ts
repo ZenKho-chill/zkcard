@@ -3,7 +3,7 @@ export declare class zkcard {
     name?: string;
     author?: string;
     color?: string;
-    theme?: "classic";
+    theme?: string;
     brightness?: number;
     thumbnail?: string;
   });
@@ -11,10 +11,13 @@ export declare class zkcard {
   public setName(name: string): this;
   public setAuthor(author: string): this;
   public setColor(color: string): this;
-  public setTheme(theme: "classic"): this;
+  public setTheme(theme: string): this;
   public setBrightness(brightness: number): this;
   public setThumbnail(thumbnail: string): this;
   public setRequester(requester: string): this;
 
   public build(): Promise<Buffer>;
 }
+
+// Theme API
+export declare function getAvailableThemes(): string[];

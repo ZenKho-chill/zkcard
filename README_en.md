@@ -35,6 +35,7 @@ const card = new zkcard({
   author: 'Artist Name',
   requester: 'User',
   color: 'auto',
+  theme: 'theme1', // "theme1" or "theme2"
   brightness: 50
 });
 
@@ -47,8 +48,7 @@ require('fs').writeFileSync('card.png', buffer);
 - ✨ Generate customizable PNG cards with beautiful design
 - 🎨 Auto color extraction from thumbnail (`auto`)
 - 🌈 Hex color support and custom brightness adjustment
-- 📊 Smooth animated progress bar
-- 🖼️ Thumbnail from URL or buffer support
+- ️ Thumbnail from URL or buffer support
 - 🔤 International font support (JP / KR / Emoji)
 - 🎯 18+ diverse random background themes (themes1 & themes2)
 - 🌈 Random color effects for text and borders
@@ -58,10 +58,12 @@ require('fs').writeFileSync('card.png', buffer);
 
 - Package: `zkcard` — main API to create cards
 - Build: `build/` — distribution (index.js, index.d.ts)  
-- Functions: `functions/` — helpers (colorFetch, adjustBrightness, rgbToHex)
+- Functions: `functions/` — helpers (colorFetch, adjustBrightness, rgbToHex, getAvailableThemes)
 - Structures: `structures/` — layout, fonts, themes and sample images
   - fonts/ — International fonts (CircularStd, NotoSans, NotoEmoji)
-  - images/ — Default avatar and 18+ theme backgrounds (themes1 & themes2)
+  - images/ — Default avatar, logo and 18+ theme backgrounds
+    - themes1/ — 8 background images for theme1
+    - themes2/ — 10 background images for theme2
 
 ## Project Structure
 
@@ -77,6 +79,7 @@ zkcard/
     ├── functions/ — helper functions
     │   ├── adjustBrightness.js — brightness adjustment
     │   ├── colorFetch.js — color extraction from images
+    │   ├── getAvailableThemes.js — get available themes list
     │   └── rgbToHex.js — RGB to Hex conversion
     └── structures/ — card resources
         ├── zkcard.js — main card creation logic
@@ -107,7 +110,7 @@ zkcard/
     .setAuthor("Gawr Gura") // Artist name
     .setRequester("ZenKho") // Requester name
     .setColor("auto") // Auto extract color from thumbnail
-    .setTheme("classic") // Current theme (only supports classic)
+    .setTheme("theme1") // Available themes: "theme1" or "theme2"
     .setBrightness(50) // Brightness (0-255)
     .setThumbnail("https://your-image-url.com/cover.jpg")
 
@@ -129,6 +132,7 @@ zkcard/
     author: "Amazing Artist", 
     requester: "Music Lover",
     color: "#ff6b6b", // Custom hex color (or 'auto' for automatic)
+    theme: "theme2",  // Card theme (theme1 or theme2)
     brightness: 75,   // Brightness (0-255)
     thumbnail: "https://your-image-url.com/cover.jpg",
   });
@@ -136,6 +140,25 @@ zkcard/
   const cardBuffer = await card.build();
   fs.writeFileSync(`custom_card.png`, cardBuffer);
 })()
+```
+
+### Check Available Themes
+
+```javascript
+const { zkcard, getAvailableThemes } = require('zkcard');
+
+// Get list of all available themes
+const availableThemes = getAvailableThemes();
+console.log('Available themes:', availableThemes); // ['themes1', 'themes2']
+
+// Use random theme
+const randomTheme = availableThemes[Math.floor(Math.random() * availableThemes.length)];
+const card = new zkcard()
+  .setName("Random Theme Song")
+  .setAuthor("Artist")
+  .setRequester("User")
+  .setTheme(randomTheme)
+  .setColor("#ff6b6b");
 ```
 
 ### Configuration Options
@@ -146,11 +169,11 @@ zkcard/
 | `setAuthor(string)` | Artist name | **Required** | Auto truncated if >15 chars |
 | `setRequester(string)` | Music requester name | **Required** | Auto truncated if >35 chars |
 | `setColor(string)` | Theme color (`auto` or hex) | `#ff0000` | `auto` extracts from thumbnail |
-| `setTheme(string)` | Card theme | `classic` | Always `classic` |
+| `setTheme(string)` | Card theme | `theme1` | `theme1` or `theme2` |
 | `setBrightness(number)` | Brightness (0-255) | `0` | Only applies when color=`auto` |
 | `setThumbnail(string)` | Thumbnail URL | Default avatar | Supports URL and data URI |
 
-### v1.5.4 Highlights
+### v1.5.8 Highlights
 
 - 🎨 **18+ Background Themes**: Auto-randomly selected from themes1/ (8 images) and themes2/ (10 images)
 - 🌈 **Random Color System**: 
@@ -158,6 +181,7 @@ zkcard/
   - Thumbnail border: white colors
 - 📏 **Smart Text Truncation**: Auto truncate long text and add "..."
 - 🖼️ **Enhanced Visuals**: Rounded corners, gradient effects and professional layout
+- 🎯 **Simplified API**: Removed progress bar to focus on core features
 
 ## License
 
