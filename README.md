@@ -35,7 +35,7 @@ const card = new zkcard({
   author: 'Tên nghệ sĩ', 
   requester: 'Người yêu cầu',
   color: 'auto',
-  theme: 'theme1', // "theme1" hoặc "theme2"
+  theme: 'zk', // "zk" hoặc "themes2"
   brightness: 50
 });
 
@@ -50,7 +50,7 @@ require('fs').writeFileSync('card.png', buffer);
 - 🌈 Hỗ trợ màu hex và điều chỉnh độ sáng tùy chỉnh
 - ️ Hỗ trợ thumbnail từ URL hoặc buffer
 - 🔤 Hỗ trợ nhiều font quốc tế (JP / KR / Emoji)
-- 🎯 18+ theme background ngẫu nhiên đa dạng (themes1 & themes2)
+- 🎯 18+ theme background ngẫu nhiên đa dạng (zk & themes2)
 - 🌈 Hiệu ứng màu sắc ngẫu nhiên cho text và border
 - 📏 Tự động cắt text dài để tối ưu hiển thị
 
@@ -62,7 +62,7 @@ require('fs').writeFileSync('card.png', buffer);
 - Structures: `structures/` — layout, fonts, themes và sample images
   - fonts/ — Font quốc tế (CircularStd, NotoSans, NotoEmoji)
   - images/ — Avatar mặc định, logo và 18+ theme backgrounds
-    - themes1/ — 8 ảnh background cho theme1
+    - zk/ — 8 ảnh background cho zk
     - themes2/ — 10 ảnh background cho theme2
 
 ## 🗂️ Cấu trúc dự án
@@ -92,7 +92,7 @@ zkcard/
         └── images/ — Hình ảnh templates
             ├── avatar.png — Avatar mặc định
             ├── logo.png — Logo ZKCard
-            ├── themes1/ — Bộ theme 1 (8 backgrounds)
+            ├── zk/ — Bộ theme 1 (8 backgrounds)
             └── themes2/ — Bộ theme 2 (10 backgrounds)
 ```
 
@@ -110,7 +110,7 @@ zkcard/
     .setAuthor("Gawr Gura") // Tên nghệ sĩ
     .setRequester("ZenKho") // Người yêu cầu
     .setColor("auto") // Tự động lấy màu từ thumbnail
-    .setTheme("theme1") // Theme khả dụng: "theme1" hoặc "theme2"
+    .setTheme("zk") // Theme khả dụng: "zk" hoặc "themes2"
     .setBrightness(50) // Độ sáng (0-255)
     .setThumbnail("https://your-image-url.com/cover.jpg")
 
@@ -132,7 +132,7 @@ zkcard/
     author: "Amazing Artist", 
     requester: "Music Lover",
     color: "#ff6b6b", // Màu hex tùy chỉnh (hoặc 'auto' để tự động)
-    theme: "theme2",  // Theme card (theme1 hoặc theme2)
+    theme: "themes2",  // Theme card (zk hoặc themes2)
     brightness: 75,   // Độ sáng (0-255)
     thumbnail: "https://your-image-url.com/cover.jpg",
   });
@@ -149,7 +149,7 @@ const { zkcard, getAvailableThemes } = require('zkcard');
 
 // Lấy danh sách tất cả themes có sẵn
 const availableThemes = getAvailableThemes();
-console.log('Themes khả dụng:', availableThemes); // ['themes1', 'themes2']
+console.log('Themes khả dụng:', availableThemes); // ['zk', 'themes2']
 
 // Sử dụng theme ngẫu nhiên
 const randomTheme = availableThemes[Math.floor(Math.random() * availableThemes.length)];
@@ -169,13 +169,13 @@ const card = new zkcard()
 | `setAuthor(string)` | Tên nghệ sĩ | **Required** | Tự động cắt nếu >15 ký tự |
 | `setRequester(string)` | Người yêu cầu phát nhạc | **Required** | Tự động cắt nếu >35 ký tự |
 | `setColor(string)` | Màu theme (`auto` hoặc hex) | `#ff0000` | `auto` sẽ lấy từ thumbnail |
-| `setTheme(string)` | Theme card | `theme1` | `theme1` hoặc `theme2` |
+| `setTheme(string)` | Theme card | `zk` | `zk` hoặc `themes2` |
 | `setBrightness(number)` | Độ sáng (0-255) | `0` | Chỉ áp dụng khi color=`auto` |
 | `setThumbnail(string)` | URL thumbnail | Avatar mặc định | Hỗ trợ URL và data URI |
 
 ### Tính năng nổi bật v1.5.8
 
-- 🎨 **18+ Background Themes**: Tự động chọn ngẫu nhiên từ themes1/ (8 ảnh) và themes2/ (10 ảnh)
+- 🎨 **18+ Background Themes**: Tự động chọn ngẫu nhiên từ zk/ (8 ảnh) và themes2/ (10 ảnh)
 - 🌈 **Random Color System**: 
   - Tên bài hát: 6 màu được phép (#000000, #FF0000, #FFFFFF, #800080, #000080, #2F4F4F)
   - Thumbnail border: Màu trắng
