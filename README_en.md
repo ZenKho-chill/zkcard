@@ -208,36 +208,6 @@ const card = new zkcard()
 
 ZKCard provides **28 diverse themes** divided into the following groups:
 
-### 👥 Character Themes (6 themes)
-- `bebe` - Bebe theme with 1 background
-- `cute` - Cute theme with 8 adorable backgrounds
-- `kobokanaeru` - Kobo Kanaeru theme with 15 backgrounds
-- `miko` - Miko theme with 42 backgrounds (most diverse)
-- `vestiazeta` - Vestia Zeta theme
-- `yui` - Yui theme
-
-### 🌈 Abstract Themes (20 themes)
-- `themes1` to `themes20` - Abstract and artistic designs
-- Each theme has 1-15 different backgrounds
-- Diverse styles from minimalist to vibrant
-
-### ⭐ Special Themes (2 themes)
-- `blank` - Minimal design with 800x200 canvas, perfect for simple cards
-- `zk` - Original ZK theme with 8 classic backgrounds
-
-### 🖼️ Preview
-To see preview of all themes, run:
-
-```bash
-# Clone repo and generate preview
-git clone https://github.com/ZenKho-chill/zkcard.git
-cd zkcard
-npm install
-node test.js
-
-# Open preview/README.md to see gallery with all 28 themes
-```
-
 **🔗 [View Complete Preview Gallery](./preview/README.md)**
 
 ### 📋 Themes list by category:

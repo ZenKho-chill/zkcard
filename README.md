@@ -208,36 +208,6 @@ const card = new zkcard()
 
 ZKCard cung cấp **28 themes đa dạng** được chia thành các nhóm sau:
 
-### 👥 Character Themes (6 themes)
-- `bebe` - Bebe theme với 1 background
-- `cute` - Cute theme với 8 backgrounds đáng yêu
-- `kobokanaeru` - Kobo Kanaeru theme với 15 backgrounds
-- `miko` - Miko theme với 42 backgrounds phong phú nhất
-- `vestiazeta` - Vestia Zeta theme
-- `yui` - Yui theme
-
-### 🌈 Abstract Themes (20 themes)
-- `themes1` đến `themes20` - Các design trừu tượng và nghệ thuật
-- Mỗi theme có từ 1-15 backgrounds khác nhau
-- Phong cách đa dạng từ minimalist đến vibrant
-
-### ⭐ Special Themes (2 themes)
-- `blank` - Minimal design với canvas 800x200, phù hợp cho simple card
-- `zk` - Original ZK theme với 8 backgrounds kinh điển
-
-### 🖼️ Xem Preview
-Để xem preview tất cả themes, chạy lệnh sau:
-
-```bash
-# Clone repo và tạo preview
-git clone https://github.com/ZenKho-chill/zkcard.git
-cd zkcard
-npm install
-node test.js
-
-# Mở file preview/README.md để xem gallery với tất cả 28 themes
-```
-
 **🔗 [Xem Preview Gallery Đầy Đủ](./preview/README.md)**
 
 ### 📋 Danh sách themes theo category:
