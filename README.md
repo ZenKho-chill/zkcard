@@ -48,11 +48,13 @@ require('fs').writeFileSync('card.png', buffer);
 - ✨ Tạo card PNG tùy chỉnh với design đẹp mắt
 - 🎨 Tự động trích xuất màu chủ đạo từ thumbnail (`auto`)
 - 🌈 Hỗ trợ màu hex và điều chỉnh độ sáng tùy chỉnh
-- ️ Hỗ trợ thumbnail từ URL hoặc buffer
+- ️ Hỗ trợ thumbnail từ URL hoặe buffer
 - 🔤 Hỗ trợ nhiều font quốc tế (JP / KR / Emoji)
-- 🎯 18+ theme background ngẫu nhiên đa dạng (zk & themes2)
+- 🎯 **28 theme background đa dạng** - từ anime characters đến abstract designs
 - 🌈 Hiệu ứng màu sắc ngẫu nhiên cho text và border
 - 📏 Tự động cắt text dài để tối ưu hiển thị
+- 🖼️ Tự động tải ảnh thumbnail với headers giả lập để tránh chặn
+- 🎭 Themes đặc biệt: bebe, cute, miko, kobokanaeru, vestiazeta, yui và nhiều hơn nữa
 
 ## 📦 Project index
 
@@ -61,9 +63,10 @@ require('fs').writeFileSync('card.png', buffer);
 - Functions: `functions/` — helper (colorFetch, adjustBrightness, rgbToHex, getAvailableThemes)
 - Structures: `structures/` — layout, fonts, themes và sample images
   - fonts/ — Font quốc tế (CircularStd, NotoSans, NotoEmoji)
-  - images/ — Avatar mặc định, logo và 18+ theme backgrounds
-    - zk/ — 8 ảnh background cho zk
-    - themes2/ — 10 ảnh background cho theme2
+  - images/ — Avatar mặc định, logo và **28 theme backgrounds đa dạng**
+    - **Character Themes**: bebe, cute, kobokanaeru, miko, vestiazeta, yui
+    - **Abstract Themes**: themes1-20 (20 themes với design trừu tượng)
+    - **Special Themes**: blank (minimal design), zk (original theme)
 
 ## 🗂️ Cấu trúc dự án
 
@@ -92,8 +95,20 @@ zkcard/
         └── images/ — Hình ảnh templates
             ├── avatar.png — Avatar mặc định
             ├── logo.png — Logo ZKCard
-            ├── zk/ — Bộ theme 1 (8 backgrounds)
-            └── themes2/ — Bộ theme 2 (10 backgrounds)
+            ├── bebe/ — Bebe theme (1 background)
+            ├── blank/ — Minimal theme (1 background)
+            ├── cute/ — Cute theme (8 backgrounds)
+            ├── kobokanaeru/ — Kobo Kanaeru theme (15 backgrounds)
+            ├── miko/ — Miko theme (42 backgrounds)
+            ├── themes1/ — Abstract theme 1 (1 background)
+            ├── themes2/ — Abstract theme 2 (10 backgrounds)
+            ├── themes3/ — Abstract theme 3 (10 backgrounds)
+            ├── themes4/ — Abstract theme 4 (14 backgrounds)
+            ├── themes5/ — Abstract theme 5 (15 backgrounds)
+            ├── themes6-20/ — Abstract themes 6-20 (varied backgrounds)
+            ├── vestiazeta/ — Vestia Zeta theme
+            ├── yui/ — Yui theme
+            └── zk/ — Original ZK theme (8 backgrounds)
 ```
 
 ## ⚡ Ví dụ nhanh
@@ -147,9 +162,10 @@ zkcard/
 ```javascript
 const { zkcard, getAvailableThemes } = require('zkcard');
 
-// Lấy danh sách tất cả themes có sẵn
+// Lấy danh sách tất cả themes có sẵn (28 themes)
 const availableThemes = getAvailableThemes();
-console.log('Themes khả dụng:', availableThemes); // ['zk', 'themes2']
+console.log('Themes khả dụng:', availableThemes); 
+// ['bebe', 'blank', 'cute', 'kobokanaeru', 'miko', 'themes1', 'themes2', ..., 'zk']
 
 // Sử dụng theme ngẫu nhiên
 const randomTheme = availableThemes[Math.floor(Math.random() * availableThemes.length)];
@@ -169,19 +185,100 @@ const card = new zkcard()
 | `setAuthor(string)` | Tên nghệ sĩ | **Required** | Tự động cắt nếu >15 ký tự |
 | `setRequester(string)` | Người yêu cầu phát nhạc | **Required** | Tự động cắt nếu >35 ký tự |
 | `setColor(string)` | Màu theme (`auto` hoặc hex) | `#ff0000` | `auto` sẽ lấy từ thumbnail |
-| `setTheme(string)` | Theme card | `zk` | `zk` hoặc `themes2` |
+| `setTheme(string)` | Theme card | `zk` | Xem [danh sách 28 themes](#-themes-có-sẵn) |
 | `setBrightness(number)` | Độ sáng (0-255) | `0` | Chỉ áp dụng khi color=`auto` |
 | `setThumbnail(string)` | URL thumbnail | Avatar mặc định | Hỗ trợ URL và data URI |
 
-### Tính năng nổi bật v1.5.8
+### Tính năng nổi bật v1.5.9
 
-- 🎨 **18+ Background Themes**: Tự động chọn ngẫu nhiên từ zk/ (8 ảnh) và themes2/ (10 ảnh)
+- 🎨 **28 Background Themes đa dạng**: 
+  - **Character themes**: bebe, cute, kobokanaeru, miko (42 backgrounds), vestiazeta, yui
+  - **Abstract themes**: themes1-20 với design trừu tượng độc đáo
+  - **Special themes**: blank (minimal), zk (original)
 - 🌈 **Random Color System**: 
   - Tên bài hát: 6 màu được phép (#000000, #FF0000, #FFFFFF, #800080, #000080, #2F4F4F)
-  - Thumbnail border: Màu trắng
+  - Thumbnail border: Màu trắng với hiệu ứng shadow
 - 📏 **Smart Text Truncation**: Tự động cắt text dài và thêm "..." 
 - 🖼️ **Enhanced Visual**: Rounded corners, gradient effects và professional layout
-- 🎯 **Simplified API**: Loại bỏ progress bar để tập trung vào tính năng cốt lõi
+- 🔗 **Improved Image Loading**: Headers giả lập để tránh bị chặn khi tải thumbnail
+- 🎯 **Optimized Performance**: Cải thiện tốc độ render và memory usage
+- 🎭 **Theme Variety**: Từ anime characters đến abstract art, phù hợp mọi sở thích
+
+## 🎨 Themes có sẵn
+
+ZKCard cung cấp **28 themes đa dạng** được chia thành các nhóm sau:
+
+### 👥 Character Themes (6 themes)
+- `bebe` - Bebe theme với 1 background
+- `cute` - Cute theme với 8 backgrounds đáng yêu
+- `kobokanaeru` - Kobo Kanaeru theme với 15 backgrounds
+- `miko` - Miko theme với 42 backgrounds phong phú nhất
+- `vestiazeta` - Vestia Zeta theme
+- `yui` - Yui theme
+
+### 🌈 Abstract Themes (20 themes)
+- `themes1` đến `themes20` - Các design trừu tượng và nghệ thuật
+- Mỗi theme có từ 1-15 backgrounds khác nhau
+- Phong cách đa dạng từ minimalist đến vibrant
+
+### ⭐ Special Themes (2 themes)
+- `blank` - Minimal design với canvas 800x200, phù hợp cho simple card
+- `zk` - Original ZK theme với 8 backgrounds kinh điển
+
+### 🖼️ Xem Preview
+Để xem preview tất cả themes, chạy lệnh sau:
+
+```bash
+# Clone repo và tạo preview
+git clone https://github.com/ZenKho-chill/zkcard.git
+cd zkcard
+npm install
+node test.js
+
+# Mở file preview/README.md để xem gallery với tất cả 28 themes
+```
+
+**🔗 [Xem Preview Gallery Đầy Đủ](./preview/README.md)**
+
+### 📋 Danh sách themes theo category:
+
+#### 👥 Character Themes:
+- [`bebe`](./preview/README.md#bebe) - [`cute`](./preview/README.md#cute) - [`kobokanaeru`](./preview/README.md#kobokanaeru) 
+- [`miko`](./preview/README.md#miko) - [`vestiazeta`](./preview/README.md#vestiazeta) - [`yui`](./preview/README.md#yui)
+
+#### 🌈 Abstract Themes:
+- [`themes1`](./preview/README.md#themes1) - [`themes2`](./preview/README.md#themes2) - [`themes3`](./preview/README.md#themes3) - [`themes4`](./preview/README.md#themes4) - [`themes5`](./preview/README.md#themes5)
+- [`themes6`](./preview/README.md#themes6) - [`themes7`](./preview/README.md#themes7) - [`themes8`](./preview/README.md#themes8) - [`themes9`](./preview/README.md#themes9) - [`themes10`](./preview/README.md#themes10)
+- [`themes11`](./preview/README.md#themes11) - [`themes12`](./preview/README.md#themes12) - [`themes13`](./preview/README.md#themes13) - [`themes14`](./preview/README.md#themes14) - [`themes15`](./preview/README.md#themes15)
+- [`themes16`](./preview/README.md#themes16) - [`themes17`](./preview/README.md#themes17) - [`themes18`](./preview/README.md#themes18) - [`themes19`](./preview/README.md#themes19) - [`themes20`](./preview/README.md#themes20)
+
+#### ⭐ Special Themes:
+- [`blank`](./preview/README.md#blank) - [`zk`](./preview/README.md#zk)
+
+Hoặc sử dụng code để tạo preview:
+
+```javascript
+const { zkcard, getAvailableThemes } = require('zkcard');
+
+// Tạo preview cho theme cụ thể
+async function createPreview(themeName) {
+  const card = new zkcard({
+    name: 'Preview Song',
+    author: 'Artist Name',
+    requester: 'Preview User',
+    theme: themeName,
+    color: 'auto',
+    brightness: 80
+  });
+  
+  const buffer = await card.build();
+  require('fs').writeFileSync(`${themeName}_preview.png`, buffer);
+  console.log(`Preview cho ${themeName} đã được tạo!`);
+}
+
+// Tạo preview cho tất cả themes
+getAvailableThemes().forEach(theme => createPreview(theme));
+```
 
 ## 🔐 License
 

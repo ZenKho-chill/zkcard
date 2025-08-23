@@ -50,9 +50,11 @@ require('fs').writeFileSync('card.png', buffer);
 - 🌈 Hex color support and custom brightness adjustment
 - ️ Thumbnail from URL or buffer support
 - 🔤 International font support (JP / KR / Emoji)
-- 🎯 18+ diverse random background themes (zk & themes2)
+- 🎯 **28 diverse background themes** - from anime characters to abstract designs
 - 🌈 Random color effects for text and borders
 - 📏 Auto text truncation for optimal display
+- 🖼️ Auto thumbnail loading with simulated headers to avoid blocking
+- 🎭 Special themes: bebe, cute, miko, kobokanaeru, vestiazeta, yui and many more
 
 ## Project index
 
@@ -61,9 +63,10 @@ require('fs').writeFileSync('card.png', buffer);
 - Functions: `functions/` — helpers (colorFetch, adjustBrightness, rgbToHex, getAvailableThemes)
 - Structures: `structures/` — layout, fonts, themes and sample images
   - fonts/ — International fonts (CircularStd, NotoSans, NotoEmoji)
-  - images/ — Default avatar, logo and 18+ theme backgrounds
-    - zk/ — 8 background images for zk
-    - themes2/ — 10 background images for theme2
+  - images/ — Default avatar, logo and **28 diverse theme backgrounds**
+    - **Character Themes**: bebe, cute, kobokanaeru, miko, vestiazeta, yui
+    - **Abstract Themes**: themes1-20 (20 themes with abstract designs)
+    - **Special Themes**: blank (minimal design), zk (original theme)
 
 ## Project Structure
 
@@ -92,8 +95,20 @@ zkcard/
         └── images/ — image templates
             ├── avatar.png — default avatar
             ├── logo.png — ZKCard logo
-            ├── zk/ — theme set 1 (8 backgrounds)
-            └── themes2/ — theme set 2 (10 backgrounds)
+            ├── bebe/ — Bebe theme (1 background)
+            ├── blank/ — Minimal theme (1 background)
+            ├── cute/ — Cute theme (8 backgrounds)
+            ├── kobokanaeru/ — Kobo Kanaeru theme (15 backgrounds)
+            ├── miko/ — Miko theme (42 backgrounds)
+            ├── themes1/ — Abstract theme 1 (1 background)
+            ├── themes2/ — Abstract theme 2 (10 backgrounds)
+            ├── themes3/ — Abstract theme 3 (10 backgrounds)
+            ├── themes4/ — Abstract theme 4 (14 backgrounds)
+            ├── themes5/ — Abstract theme 5 (15 backgrounds)
+            ├── themes6-20/ — Abstract themes 6-20 (varied backgrounds)
+            ├── vestiazeta/ — Vestia Zeta theme
+            ├── yui/ — Yui theme
+            └── zk/ — Original ZK theme (8 backgrounds)
 ```
 
 ## Quick examples
@@ -147,9 +162,10 @@ zkcard/
 ```javascript
 const { zkcard, getAvailableThemes } = require('zkcard');
 
-// Get list of all available themes
+// Get list of all available themes (28 themes)
 const availableThemes = getAvailableThemes();
-console.log('Available themes:', availableThemes); // ['zk', 'themes2']
+console.log('Available themes:', availableThemes); 
+// ['bebe', 'blank', 'cute', 'kobokanaeru', 'miko', 'themes1', 'themes2', ..., 'zk']
 
 // Use random theme
 const randomTheme = availableThemes[Math.floor(Math.random() * availableThemes.length)];
@@ -169,19 +185,100 @@ const card = new zkcard()
 | `setAuthor(string)` | Artist name | **Required** | Auto truncated if >15 chars |
 | `setRequester(string)` | Music requester name | **Required** | Auto truncated if >35 chars |
 | `setColor(string)` | Theme color (`auto` or hex) | `#ff0000` | `auto` extracts from thumbnail |
-| `setTheme(string)` | Card theme | `zk` | `zk` or `themes2` |
+| `setTheme(string)` | Card theme | `zk` | See [28 available themes](#-available-themes) |
 | `setBrightness(number)` | Brightness (0-255) | `0` | Only applies when color=`auto` |
 | `setThumbnail(string)` | Thumbnail URL | Default avatar | Supports URL and data URI |
 
-### v1.5.8 Highlights
+### v1.5.9 Highlights
 
-- 🎨 **18+ Background Themes**: Auto-randomly selected from zk/ (8 images) and themes2/ (10 images)
+- 🎨 **28 Diverse Background Themes**: 
+  - **Character themes**: bebe, cute, kobokanaeru, miko (42 backgrounds), vestiazeta, yui
+  - **Abstract themes**: themes1-20 with unique abstract designs
+  - **Special themes**: blank (minimal), zk (original)
 - 🌈 **Random Color System**: 
   - Song name: 6 allowed colors (#000000, #FF0000, #FFFFFF, #800080, #000080, #2F4F4F)
-  - Thumbnail border: white colors
+  - Thumbnail border: white with shadow effects
 - 📏 **Smart Text Truncation**: Auto truncate long text and add "..."
 - 🖼️ **Enhanced Visuals**: Rounded corners, gradient effects and professional layout
-- 🎯 **Simplified API**: Removed progress bar to focus on core features
+- 🔗 **Improved Image Loading**: Simulated headers to avoid blocking when loading thumbnails
+- 🎯 **Optimized Performance**: Improved render speed and memory usage
+- 🎭 **Theme Variety**: From anime characters to abstract art, suitable for all preferences
+
+## 🎨 Available Themes
+
+ZKCard provides **28 diverse themes** divided into the following groups:
+
+### 👥 Character Themes (6 themes)
+- `bebe` - Bebe theme with 1 background
+- `cute` - Cute theme with 8 adorable backgrounds
+- `kobokanaeru` - Kobo Kanaeru theme with 15 backgrounds
+- `miko` - Miko theme with 42 backgrounds (most diverse)
+- `vestiazeta` - Vestia Zeta theme
+- `yui` - Yui theme
+
+### 🌈 Abstract Themes (20 themes)
+- `themes1` to `themes20` - Abstract and artistic designs
+- Each theme has 1-15 different backgrounds
+- Diverse styles from minimalist to vibrant
+
+### ⭐ Special Themes (2 themes)
+- `blank` - Minimal design with 800x200 canvas, perfect for simple cards
+- `zk` - Original ZK theme with 8 classic backgrounds
+
+### 🖼️ Preview
+To see preview of all themes, run:
+
+```bash
+# Clone repo and generate preview
+git clone https://github.com/ZenKho-chill/zkcard.git
+cd zkcard
+npm install
+node test.js
+
+# Open preview/README.md to see gallery with all 28 themes
+```
+
+**🔗 [View Complete Preview Gallery](./preview/README.md)**
+
+### 📋 Themes list by category:
+
+#### 👥 Character Themes:
+- [`bebe`](./preview/README.md#bebe) - [`cute`](./preview/README.md#cute) - [`kobokanaeru`](./preview/README.md#kobokanaeru) 
+- [`miko`](./preview/README.md#miko) - [`vestiazeta`](./preview/README.md#vestiazeta) - [`yui`](./preview/README.md#yui)
+
+#### 🌈 Abstract Themes:
+- [`themes1`](./preview/README.md#themes1) - [`themes2`](./preview/README.md#themes2) - [`themes3`](./preview/README.md#themes3) - [`themes4`](./preview/README.md#themes4) - [`themes5`](./preview/README.md#themes5)
+- [`themes6`](./preview/README.md#themes6) - [`themes7`](./preview/README.md#themes7) - [`themes8`](./preview/README.md#themes8) - [`themes9`](./preview/README.md#themes9) - [`themes10`](./preview/README.md#themes10)
+- [`themes11`](./preview/README.md#themes11) - [`themes12`](./preview/README.md#themes12) - [`themes13`](./preview/README.md#themes13) - [`themes14`](./preview/README.md#themes14) - [`themes15`](./preview/README.md#themes15)
+- [`themes16`](./preview/README.md#themes16) - [`themes17`](./preview/README.md#themes17) - [`themes18`](./preview/README.md#themes18) - [`themes19`](./preview/README.md#themes19) - [`themes20`](./preview/README.md#themes20)
+
+#### ⭐ Special Themes:
+- [`blank`](./preview/README.md#blank) - [`zk`](./preview/README.md#zk)
+
+Or use code to create previews:
+
+```javascript
+const { zkcard, getAvailableThemes } = require('zkcard');
+
+// Create preview for specific theme
+async function createPreview(themeName) {
+  const card = new zkcard({
+    name: 'Preview Song',
+    author: 'Artist Name',
+    requester: 'Preview User',
+    theme: themeName,
+    color: 'auto',
+    brightness: 80
+  });
+  
+  const buffer = await card.build();
+  require('fs').writeFileSync(`${themeName}_preview.png`, buffer);
+  console.log(`Preview for ${themeName} created!`);
+}
+
+// Create preview for all themes
+getAvailableThemes().forEach(theme => createPreview(theme));
+```
 
 ## License
 
